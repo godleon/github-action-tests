@@ -6,27 +6,37 @@ on:
     - master
   pull_request:
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   job-1:
+    name: "Job One"
     runs-on: ubuntu-18.04
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/hello-world-docker-action@master
+    - uses: hashicorp/setup-terraform@v1
       with:
-        who-to-greet: 'job-1-container'
+        terraform_version: 0.13.3
+    - run: terraform version
 
-  job-2:
-    needs: job-1
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/hello-world-docker-action@master
-      with:
-        who-to-greet: 'job-2-container'
+    - run: pwd
+
+    - run: ls -al ./
+
+  # job-2:
+  #   needs: job-1
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/hello-world-docker-action@master
+  #     with:
+  #       who-to-greet: 'job-2-container'
   
-  job-3:
-    needs: [job-1, job-2]
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/hello-world-docker-action@master
-      with:
-        who-to-greet: 'job-3-container'
+  # job-3:
+  #   needs: [job-1, job-2]
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/hello-world-docker-action@master
+  #     with:
+  #       who-to-greet: 'job-3-container'
