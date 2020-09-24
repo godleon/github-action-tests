@@ -30,9 +30,9 @@ jobs:
       with:
         terraform_version: 0.13.3
     - run: -|
-        terraform version && \
-        pwd && \
-        ls -al ./ && \
+        terraform version &&
+        pwd &&
+        ls -al ./ &&
         env
 
   # job-2:
