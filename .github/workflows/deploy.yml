@@ -4,12 +4,22 @@ on:
   push:
     branches:
     - master
+    paths-ignore:
+    - 'docs/**'
+    - 'README.md'
   pull_request:
 
+
+env:
+  PROJECT_ID: ${{ secrets.PROJECT_ID }}
+  RUN_REGION: asia-northeast2
+
+  
 defaults:
   run:
     shell: bash
 
+    
 jobs:
   job-1:
     name: "Job One"
@@ -19,11 +29,11 @@ jobs:
     - uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.13.3
-    - run: terraform version
-
-    - run: pwd
-
-    - run: ls -al ./
+    - run: -|
+        terraform version && \
+        pwd && \
+        ls -al ./ && \
+        env
 
   # job-2:
   #   needs: job-1
