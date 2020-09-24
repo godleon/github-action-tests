@@ -29,11 +29,7 @@ jobs:
     - uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.13.3
-    - run: -|
-        terraform version &&
-        pwd &&
-        ls -al ./ &&
-        env
+    - run: terraform version && pwd && ls -al ./ && env
 
   # job-2:
   #   needs: job-1
